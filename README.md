@@ -16,4 +16,4 @@ ruby wav-effector.rb
 Output normalized wav file as *[original-name]-normalized.wav* to same directory of the original.
 
 Comparizon after normalized (right waveform) with original (left waveform).
-![](./img/comp-normalize.jpg)
+![image](./img/comp-normalize.JPG)
