@@ -8,7 +8,7 @@ def bit_per_sample(format)
 end
 
 def get_wav_array(data_chunk, format)
-  data_chunk.data.unpack(bit_per_sample(format)) # datachuck -> dataの配列へunpack
+  data_chunk.data.unpack(bit_per_sample(format))
 end
 
 def get_peak(wav_array)
