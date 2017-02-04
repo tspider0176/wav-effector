@@ -29,15 +29,27 @@ wavs = get_wav_array(data_chunk, format)
 f.close
 
 puts "Previous peak : #{get_peak(wavs)}"
-result = get_peak(wavs) == SIGNED_SHORT_MAX ? wavs : normalize(wavs)
-data_chunk.data = result.pack('s*')
 
+result = get_peak(wavs) == SIGNED_SHORT_MAX ? wavs : normalize(wavs)
+
+# Distortion (Sigmoid-like function)
+def sgn(x)
+  x > 0 ? 1 : -1
+end
+
+def distortion(wav_array)
+  wav_array.map{|data| data * (sgn(data) * (1 - Math.exp((-1) * data.abs)))}
+end
+
+result = distortion(result)
+puts "distorted."
+
+data_chunk.data = result.pack('s*')
 puts "normalized peak : #{get_peak(result)}"
-open("#{file_name.split('.').first}-normalized.wav", "w"){|out|
+open("#{file_name.split('.').first}-normalized-distorted.wav", "w"){|out|
   WavFile::write(out, format, [data_chunk])
 }
 
 # TODO
-# ディストーション
 # limitation
 # comp
