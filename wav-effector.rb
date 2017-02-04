@@ -36,3 +36,8 @@ puts "normalized peak : #{get_peak(result)}"
 open("#{file_name.split('.').first}-normalized.wav", "w"){|out|
   WavFile::write(out, format, [data_chunk])
 }
+
+# TODO
+# ディストーション
+# limitation
+# comp
