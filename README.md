@@ -1,19 +1,22 @@
-## Wav effector
+# Wav effector
 Static effector for wav file
 
-### init
+## init
 ```
 bundle install
 ```
 
-### run
+## run
 ```
-ruby wav-effector.rb
+ruby effector.rb
 ```
 
-### function
+## function
 * Normalize  
 Output normalized wav file as *[original-name]-normalized.wav* to same directory of the original.
 
 Comparizon after normalized (right waveform) with original (left waveform).
 ![image](./img/comp-normalize.JPG)
+
+* Distortion  
+Output normalized wav file as *[original-name]-distorted.wav* to same directory of the original.
