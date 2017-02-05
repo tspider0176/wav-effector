@@ -8,7 +8,6 @@ class Distortion < Effect
 
   def run
     distort(@wavs)
-    
   end
 
   def write
@@ -24,6 +23,6 @@ private
   end
 
   def distort(wav_array)
-    wav_array.map{|data| data * (sgn(data) * (1.0 - Math.exp((-1.0) * data.abs)))}
+    wav_array.map{|data| data * (1.0 - Math.exp((-1.0) * data.abs))}
   end
 end

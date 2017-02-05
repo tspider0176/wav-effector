@@ -5,10 +5,11 @@ class Normalization < Effect
 
   def initialize(file_name)
     super(file_name)
+    @peak = get_peak(@wavs)
   end
 
   def run
-    get_peak(@wavs) == SIGNED_SHORT_MAX ? @wavs : normalize(@wavs)
+    @peak == SIGNED_SHORT_MAX ? @wavs : normalize(@wavs)
   end
 
   def write
@@ -24,7 +25,6 @@ private
   end
 
   def normalize(wav_array)
-    peak = get_peak(wav_array)
-    wav_array.map{|data| data * (SIGNED_SHORT_MAX.to_f / peak)}.map(&:to_i)
+    wav_array.map{|data| data * (SIGNED_SHORT_MAX.to_f / @peak)}.map(&:to_i)
   end
 end
