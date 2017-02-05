@@ -11,12 +11,17 @@ class WavEffector
 
   def normalize()
     Normalization.new(@file_name).write
-    WavEffector.new("#{@file_name.split('.').first}-normalized.wav")
+    WavEffector.new("#{fileName}-normalized.wav")
   end
 
   def distort()
     Distortion.new(@file_name).write
-    WavEffector.new("#{@file_name.split('.').first}-distorted.wav")
+    WavEffector.new("#{fileName}-distorted.wav")
+  end
+
+private
+  def fileName
+    "#{@file_name.split('.').first}"
   end
 end
 
