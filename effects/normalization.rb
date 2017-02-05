@@ -1,8 +1,6 @@
 require_relative './effect'
 
 class Normalization < Effect
-  SIGNED_SHORT_MAX = "111111111111111".to_i(2)
-
   def initialize(file_name)
     super(file_name)
     @peak = get_peak(@wavs)

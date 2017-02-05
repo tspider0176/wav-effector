@@ -2,6 +2,8 @@ require 'rubygems'
 require 'wav-file'
 
 class Effect
+  SIGNED_SHORT_MAX = "111111111111111".to_i(2)
+  
   def initialize(file_name)
     f = open(file_name)
     @file_name = file_name

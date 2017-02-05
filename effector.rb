@@ -14,8 +14,8 @@ class WavEffector
     WavEffector.new("#{fileName}-normalized.wav")
   end
 
-  def distort()
-    Distortion.new(@file_name).write
+  def distort(algorithm)
+    Distortion.new(@file_name, algorithm).write
     WavEffector.new("#{fileName}-distorted.wav")
   end
 
@@ -25,6 +25,5 @@ private
   end
 end
 
-WavEffector.new("sample/sample.wav").normalize
-WavEffector.new("sample/sample.wav").distort
-WavEffector.new("sample/sample.wav").normalize.distort
+WavEffector.new("sample/sample.wav").distort('fuzz')
+WavEffector.new("sample/sample.wav").normalize.distort('fuzz')
