@@ -18,5 +18,8 @@ Output normalized wav file as *[original-name]-normalized.wav* to same directory
 Comparizon after normalized (right waveform) with original (left waveform).
 ![image](./img/comp-normalize.JPG)
 
-* Distortion  
+* Distortion(Fuzz effect)  
 Output normalized wav file as *[original-name]-distorted.wav* to same directory of the original.
+
+Comparizon after distorted (each bottom waveform) with original (each top waveform).
+![image](./img/distortion-fuzz.png)
