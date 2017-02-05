@@ -20,5 +20,6 @@ class WavEffector
   end
 end
 
-WavEffector.new("sample/sample.wav").normalize.distort
+WavEffector.new("sample/sample.wav").normalize
 WavEffector.new("sample/sample.wav").distort
+WavEffector.new("sample/sample.wav").normalize.distort
