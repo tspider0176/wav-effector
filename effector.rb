@@ -2,7 +2,7 @@ require 'rubygems'
 require 'wav-file'
 
 require_relative 'effects/normalization'
-require_relative 'effects/distortion'
+require_relative 'effects/distortion_effect/overdrive'
 
 class WavEffector
   def initialize(file_name)
@@ -14,9 +14,14 @@ class WavEffector
     WavEffector.new("#{fileName}-normalized.wav")
   end
 
-  def distort(algorithm)
-    Distortion.new(@file_name, algorithm).write
-    WavEffector.new("#{fileName}-distorted.wav")
+  def distort
+    Distortion.new(@file_name).write
+    WavEffector.new("#{fileName}-distort.wav")
+  end
+
+  def overdrive
+    Overdrive.new(@file_name).write
+    WavEffector.new("#{fileName}-overdrive.wav")
   end
 
 private
@@ -25,5 +30,5 @@ private
   end
 end
 
-WavEffector.new("sample/sample.wav").distort('fuzz')
-WavEffector.new("sample/sample.wav").normalize.distort('fuzz')
+WavEffector.new("sample/sample.wav").overdrive
+WavEffector.new("sample/sample.wav").normalize.overdrive
