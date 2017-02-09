@@ -9,7 +9,7 @@ class WavEffector
     @file_name = file_name
   end
 
-  def normalize()
+  def normalize
     Normalization.new(@file_name).write
     WavEffector.new("#{fileName}-normalized.wav")
   end

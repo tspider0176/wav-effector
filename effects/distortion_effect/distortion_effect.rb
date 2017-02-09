@@ -7,6 +7,7 @@ class DistortionEffect < Effect
 
   def write
     @data_chunk.data = run.pack(bit_per_sample)
+
     open("#{@file_name.split('.').first}-#{class_name}.wav", "w"){|out|
       WavFile::write(out, @format, [@data_chunk])
     }
