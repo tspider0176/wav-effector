@@ -16,12 +16,12 @@ class WavEffector
 
   def distort
     Distortion.new(@file_name).write
-    WavEffector.new("#{fileName}-distort.wav")
+    WavEffector.new("#{fileName}-Distortion.wav")
   end
 
   def overdrive
     Overdrive.new(@file_name).write
-    WavEffector.new("#{fileName}-overdrive.wav")
+    WavEffector.new("#{fileName}-Overdrive.wav")
   end
 
 private
