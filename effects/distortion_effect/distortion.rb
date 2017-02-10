@@ -6,15 +6,11 @@ class Distortion < DistortionEffect
   end
 
   def run
-    peak = get_peak(@wavs)
+    peak = get_peak
     distort(peak)
   end
 
 private
-  def get_peak(wav_array)
-    wav_array.max
-  end
-
   def sgn(x)
     x > 0 ? 1 : -1
   end

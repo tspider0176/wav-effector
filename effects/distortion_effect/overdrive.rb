@@ -3,7 +3,7 @@ require_relative './distortion_effect'
 class Overdrive < DistortionEffect
   def initialize(file_name)
     super(file_name)
-    @threshold = get_peak(@wavs) / 3
+    @threshold = get_peak / 3
   end
 
   def run
@@ -11,10 +11,6 @@ class Overdrive < DistortionEffect
   end
 
 private
-  def get_peak(wav_array)
-    wav_array.max
-  end
-
   def overdrive
     peak = get_peak(@wavs)
 

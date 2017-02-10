@@ -3,7 +3,7 @@ require 'wav-file'
 
 class Effect
   SIGNED_SHORT_MAX = "111111111111111".to_i(2)
-  
+
   def initialize(file_name)
     f = open(file_name)
     @file_name = file_name
@@ -19,6 +19,14 @@ class Effect
 
   def bit_per_sample
     @format.bitPerSample == 16 ? 's*' : 'c*'
+  end
+
+  def get_peak
+    @wavs.max
+  end
+
+  def get_format
+    @format
   end
 
   def write
