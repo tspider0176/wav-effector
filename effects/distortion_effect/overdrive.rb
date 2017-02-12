@@ -7,13 +7,12 @@ class Overdrive < DistortionEffect
   end
 
   def run
-    overdrive
+    peak = get_peak
+    overdrive(peak)
   end
 
 private
-  def overdrive
-    peak = get_peak(@wavs)
-
+  def overdrive(peak)
     @wavs.map{|data|
       case data.abs
       when 0..@threshold then
