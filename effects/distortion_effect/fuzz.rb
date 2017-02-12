@@ -12,8 +12,8 @@ class Fuzz < DistortionEffect
 
 private
   def fuzz(peak, dist, q)
-      @wavs.map{|data|
-        data == (q * peak.to_f).to_i ? ((1/dist) + q / 1 - Math.exp(dist * q)) * peak.to_f : (((data - q) / (1 - Math.exp((-1) * dist * (data - q))) + (q / (1 - Math.exp(dist * q)))))
-      }
+    @wavs.map{|data|
+      data == (q * peak).to_i ? (((1.0/dist) + q*peak / 1 - Math.exp(dist * q*peak))).to_i : (((data - q*peak) / (1 - Math.exp((-1) * dist * (data - q*peak)))) + (q*peak / (1 - Math.exp(dist * q*peak)))).to_i
+    }
   end
 end
