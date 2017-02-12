@@ -45,5 +45,9 @@ end
 
 effector = WavEffector.new("sample/sample.wav")
 puts effector.get_information
+# effector.distortion
+# effector.normalize.distortion
+# effector.overdrive
+# effector.normalize.overdrive
 effector.fuzz
 effector.normalize.fuzz

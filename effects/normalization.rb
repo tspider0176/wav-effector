@@ -3,7 +3,7 @@ require_relative './effect'
 class Normalization < Effect
   def initialize(file_name)
     super(file_name)
-    @peak = get_peak(@wavs)
+    @peak = get_peak
   end
 
   def run
