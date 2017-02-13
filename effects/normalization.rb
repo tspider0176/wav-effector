@@ -18,10 +18,6 @@ class Normalization < Effect
   end
 
 private
-  def get_peak(wav_array)
-    wav_array.max
-  end
-
   def normalize(wav_array)
     wav_array.map{|data| data * (SIGNED_SHORT_MAX.to_f / @peak)}.map(&:to_i)
   end

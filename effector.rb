@@ -49,5 +49,5 @@ puts effector.get_information
 # effector.normalize.distortion
 # effector.overdrive
 # effector.normalize.overdrive
-effector.fuzz
-effector.normalize.fuzz
+# effector.fuzz
+# effector.normalize.fuzz
