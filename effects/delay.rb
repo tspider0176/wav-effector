@@ -6,7 +6,7 @@ class Delay < Effect
   end
 
   def run
-    delay(6, 20000, 0.6)
+    delay(6, 33000, 0.5)
   end
 
   def write
@@ -27,14 +27,17 @@ private
   end
 
   def delay(delay_num, delay_time, decay_rate)
+    peak = get_peak
     resized = @wavs + zero_arr(delay_time * delay_num)
 
     init_arr = zero_arr(@wavs.length + delay_time * delay_num)
 
-    resized + (1..delay_num).map{|i|
+    delay = (1..delay_num).map{|i|
       delay_arr(delay_time, i).map{|data|
         data * (decay_rate ** i)
       } + zero_arr(delay_time * (delay_num - i))
     }.inject(init_arr){|acc, arr| acc.zip(arr).map{|a, b| a + b}}
+
+    resized.zip(delay).map{|a,b| a + b > peak ? peak : a + b}
   end
 end

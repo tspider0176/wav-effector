@@ -3,6 +3,7 @@ require 'wav-file'
 
 require_relative 'effects/effect'
 require_relative 'effects/normalization'
+require_relative 'effects/delay'
 require_relative 'effects/distortion_effect/distortion'
 require_relative 'effects/distortion_effect/overdrive'
 require_relative 'effects/distortion_effect/fuzz'
@@ -37,13 +38,18 @@ class WavEffector
     WavEffector.new("#{fileName}-Fuzz.wav")
   end
 
+  def delay
+    Delay.new(@file_name).write
+    WavEffector.new("#{fileName}-Delay")
+  end
+
 private
   def fileName
     "#{@file_name.split('.').first}"
   end
 end
 
-effector = WavEffector.new("sample/sample.wav")
+effector = WavEffector.new("sample/piano.wav")
 puts effector.get_information
 # effector.distortion
 # effector.normalize.distortion
@@ -51,3 +57,4 @@ puts effector.get_information
 # effector.normalize.overdrive
 # effector.fuzz
 # effector.normalize.fuzz
+effector.delay
