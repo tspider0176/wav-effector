@@ -34,9 +34,9 @@ private
 
     delay = (1..delay_num).map{|i|
       delay_arr(delay_time, i).map{|data|
-        data * (decay_rate ** i)
+        data.to_f * (decay_rate ** i)
       } + zero_arr(delay_time * (delay_num - i))
-    }.inject(init_arr){|acc, arr| acc.zip(arr).map{|a, b| a + b}}
+    }.inject(init_arr){|acc, arr| acc.zip(arr).map{|a, b| (a + b).to_i}}
 
     resized.zip(delay).map{|a,b| a + b > peak ? peak : a + b}
   end
