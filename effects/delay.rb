@@ -11,12 +11,16 @@ class Delay < Effect
 
   def write
     @data_chunk.data = run.pack(bit_per_sample)
-    open("#{@file_name.split('.').first}-delayed.wav", "w"){|out|
+    open("#{@file_name.split('.').first}-#{class_name}.wav", "w"){|out|
       WavFile::write(out, @format, [@data_chunk])
     }
   end
 
 private
+  def class_name
+    self.class.to_s
+  end
+
   def delay_arr(delay_time, n)
     delay_sample = [0] * delay_time
     (delay_sample * n) + @wavs
