@@ -40,7 +40,12 @@ class WavEffector
 
   def delay
     Delay.new(@file_name).write
-    WavEffector.new("#{fileName}-Delay")
+    WavEffector.new("#{fileName}-Delay.wav")
+  end
+
+  def reverb
+    Reverb.new(@file_name).write
+    WavEffector.new("#{fileName}-Reverb.wav")
   end
 
 private
@@ -57,4 +62,4 @@ puts effector.get_information
 # effector.normalize.overdrive
 # effector.fuzz
 # effector.normalize.fuzz
-effector.delay
+effector.reverb
