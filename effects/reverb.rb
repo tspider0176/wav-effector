@@ -6,7 +6,7 @@ class Reverb < Effect
   end
 
   def run
-    reverb(10, 3000, 0.8)
+    reverb(10, 3000, 0.5)
   end
 
   def write
