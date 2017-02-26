@@ -49,6 +49,10 @@ end
 
 ## Distortion (歪み)
 ### 歪みの種類について
+大きく分けてディストーションはDistortion、Fuzz、Overdriveの三つがあることを説明
+三つの違いは明確なものがなく、実装する側が定義するので違いが現れることもあるが、
+今回の実装ではDAFXの論文を参考に実装したことを記述。
+最初にディストーションはstatic characteristic curve（特徴グラフ）で表現されることについての説明
 
 ### Distortion
 
