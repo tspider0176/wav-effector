@@ -1,5 +1,7 @@
 ## はじめに
 
+ディストーション飲みの説明にするか？
+
 ## 使用ライブラリ
 
 ## Digital Audio Effect (DAFX conference)
