@@ -58,10 +58,38 @@ end
 
 ### Distortion
 
+```rb
+def distort(peak)
+    @wavs.map{|data|
+      sgn(data) * (1.0 - Math.exp((-1.0) * data.abs)) * peak.to_f
+    }
+end
+```
+
 ### Fuzz
+```rb
+def fuzz(peak, dist, q)
+  @wavs.map{|data|
+    data == (q * peak).to_i ? (((1.0/dist) + q*peak / 1 - Math.exp(dist * q*peak))).to_i : (((data - q*peak) / (1 - Math.exp((-1) * dist * (data - q*peak)))) + (q*peak / (1 - Math.exp(dist * q*peak)))).to_i
+  }
+end
+```
 
 ### Overdrive
-
+```rb
+def overdrive(peak)
+  @wavs.map{|data|
+    case data.abs
+    when 0..@threshold then
+      2.0 * data
+    when (@threshold + 1)..(@threshold * 2) then
+      (3.0 - (2.0 - 3.0 * data) ** 2.0) / 3.0
+    when (@threshold * 2 + 1)..(peak) then
+      peak
+    end
+  }.map(&:to_i)
+end
+```
 
 ## まとめ
 
