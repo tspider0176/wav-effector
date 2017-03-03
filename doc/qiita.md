@@ -73,8 +73,6 @@ wavs = dataChunk.data.unpack(bit)
 normalize(wavs)
 ```
 
-### 参考
-[音量の正規化(ノーマライズ:normalize)](http://www.web-sky.org/program/normalize.html)
 
 ## Distortion (歪み)
 ### 歪みの種類について
@@ -121,3 +119,5 @@ end
 ## まとめ
 
 ## 参考
+* [橋本商会 >> wavファイルをRubyで編集する](http://shokai.org/blog/archives/5408)  
+* [音量の正規化(ノーマライズ:normalize)](http://www.web-sky.org/program/normalize.html)
