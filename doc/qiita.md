@@ -79,7 +79,17 @@ normalize(wavs)
 大きく分けてディストーションはDistortion、Fuzz、Overdriveの三つがあることを説明
 三つの違いは明確なものがなく、実装する側が定義するので違いが現れることもあるが、
 今回の実装ではDAFXの論文を参考に実装したことを記述。
-最初にディストーションはstatic characteristic curve（特徴グラフ）で表現されることについての説明
+最初にディストーションはstatic characteristic curve（特徴グラフ）で表現される。DAFX論文集に従うと、
+* Distortion  
+指数的に滑らかに増幅
+
+* Fuzz  
+一定の値を区切りに出力を固定/増幅
+
+* Overdrive  
+ある一定の値を超えた所で過度に増幅
+
+と特徴がある。
 
 ### Distortion
 
