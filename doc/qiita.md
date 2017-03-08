@@ -92,6 +92,7 @@ normalize(wavs)
 と特徴がある。
 
 ### Distortion
+Distortionエフェクトの数式での定義は以下になります。
 
 ```rb
 def distort(peak)
@@ -111,6 +112,8 @@ Fuzzという単語には「毛羽立った」という意味があり、その�
 今回はDAFXの論文に従って、模擬的なFuzzエフェクトを発生させてみます。
 
 #### 実装
+今回実装するFuzzエフェクトの数式での定義は以下になります。
+
 ```rb
 def fuzz(peak, dist, q)
   @wavs.map{|data|
