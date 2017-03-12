@@ -1,8 +1,12 @@
 ## はじめに
 
-ディストーションのみの説明にするか？
+## 環境と使用ライブラリ
+```
+$ ruby -v
+ruby 2.2.3p173 (2015-08-18 revision 51636)
+```
 
-## 使用ライブラリ
+* wav-file (gem)
 
 ## Digital Audio Effect (DAFX conference)
 ```
