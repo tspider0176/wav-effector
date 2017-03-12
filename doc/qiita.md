@@ -9,13 +9,7 @@
 DAFX is a acronym for digital audio effects. It is also the name for a European research project for co-operation and scientific transfer, namely EU-COST-G6 “Digital Audio Effects” (1997-2001).
 ```
 
-DAFXのカンファレンスページ [LINK](http://www.dafx.de/) から引用。意訳すると、
-
-```
-
-```
-
-簡単に言うとデジタル音声処理の学会のことです。様々な理論がこの学会で提唱され、現在主流なプラグインに利用されています。
+DAFXのカンファレンスページ [LINK](http://www.dafx.de/) から引用。DAFXは簡単に言うとデジタル音声処理の学会のことです。様々な理論がこの学会で提唱され、現在主流なプラグインに利用されています。
 
 ## Normalization (正規化)
 ### 正規化とは？
