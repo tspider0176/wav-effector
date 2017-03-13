@@ -103,6 +103,10 @@ normalize(wavs)
 ### 1.2 Distortion
 Distortionエフェクトの数式での定義は以下になります。
 
+![](./img/def_distortion.png)
+
+この数式が示すグラフは以下のようになります。
+
 ```rb
 def distort(peak)
     @wavs.map{|data|
