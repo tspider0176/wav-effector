@@ -172,3 +172,4 @@ end
 ## 参考
 * [橋本商会 >> wavファイルをRubyで編集する](http://shokai.org/blog/archives/5408)  
 * [音量の正規化(ノーマライズ:normalize)](http://www.web-sky.org/program/normalize.html)
+* [DAFX](http://www.dafx.de/)
