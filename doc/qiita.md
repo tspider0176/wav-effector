@@ -162,6 +162,27 @@ def overdrive(peak)
 end
 ```
 
+## 2. Delay (遅延)
+### 2.1 説明
+
+### 2.2 実装
+```rb
+def delay(delay_num, delay_time, decay_rate)
+  peak = get_peak
+  resized = @wavs + zero_arr(delay_time * delay_num)
+
+  init_arr = zero_arr(@wavs.length + delay_time * delay_num)
+
+  delay = (1..delay_num).map{|i|
+    delay_arr(delay_time, i).map{|data|
+      data.to_f * (decay_rate ** i)
+    } + zero_arr(delay_time * (delay_num - i))
+  }.inject(init_arr){|acc, arr| acc.zip(arr).map{|a, b| (a + b).to_i}}
+
+  resized.zip(delay).map{|a,b| a + b > peak ? peak : a + b}
+end
+```
+
 ## まとめ
 この記事はAIZU AVENT CALENDAR 2016 で書いた記事から発展して取り組んだ内容になりました。
 今までサウンドプログラミングには全く触れてきませんでしたが、趣味と自分の大学生活で身につけた技術双方を取り入れる事が出来てとても楽しかったです。
