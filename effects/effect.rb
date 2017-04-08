@@ -22,7 +22,7 @@ class Effect
   end
 
   def get_peak
-    @wavs.max
+    [@wavs.max, @wavs.min.abs].max
   end
 
   def get_format
