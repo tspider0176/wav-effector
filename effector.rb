@@ -40,16 +40,6 @@ class WavEffector
     WavEffector.new("#{file_name}-Fuzz.wav")
   end
 
-  def delay
-    Delay.new(@file_name).write
-    WavEffector.new("#{file_name}-Delay.wav")
-  end
-
-  def reverb
-    Reverb.new(@file_name).write
-    WavEffector.new("#{file_name}-Reverb.wav")
-  end
-
   private
 
   # Returns file name without flie extension
