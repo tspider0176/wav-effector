@@ -1,5 +1,6 @@
 require_relative '../effect'
 
+# Parent class for some distortion effects class
 class DistortionEffect < Effect
   def initialize(file_name)
     super(file_name)
@@ -8,12 +9,13 @@ class DistortionEffect < Effect
   def write
     @data_chunk.data = run.pack(bit_per_sample)
 
-    open("#{@file_name.split('.').first}-#{class_name}.wav", "w"){|out|
-      WavFile::write(out, @format, [@data_chunk])
-    }
+    open("#{@file_name.split('.').first}-#{class_name}.wav", 'w') do |out|
+      WavFile.write(out, @format, [@data_chunk])
+    end
   end
 
-private
+  private
+
   def class_name
     self.class.to_s
   end
