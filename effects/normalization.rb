@@ -1,5 +1,6 @@
 require_relative './effect'
 
+# Implements normalization effect
 class Normalization < Effect
   def initialize(file_name)
     super(file_name)
@@ -12,17 +13,20 @@ class Normalization < Effect
 
   def write
     @data_chunk.data = run.pack(bit_per_sample)
-    open("#{@file_name.split('.').first}-normalized.wav", "w"){|out|
-      WavFile::write(out, @format, [@data_chunk])
-    }
+    open("#{@file_name.split('.').first}-normalized.wav", 'w') do |out|
+      WavFile.write(out, @format, [@data_chunk])
+    end
   end
 
-private
+  private
+
   def get_peak(wav_array)
     wav_array.max
   end
 
   def normalize(wav_array)
-    wav_array.map{|data| data * (SIGNED_SHORT_MAX.to_f / @peak)}.map(&:to_i)
+    wav_array.map do |data|
+      data * (SIGNED_SHORT_MAX.to_f / @peak)
+    end.map(&:to_i)
   end
 end
