@@ -2,12 +2,11 @@ require_relative './distortion_effect'
 
 # Implements distortion effect
 class Distortion < DistortionEffect
-  def initialize(file_name)
-    super(file_name)
+  def initialize(wav_array)
+    super(wav_array)
   end
 
   def run
-    peak = get_peak
     distort(peak)
   end
 

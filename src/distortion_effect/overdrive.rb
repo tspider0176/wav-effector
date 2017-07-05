@@ -2,13 +2,12 @@ require_relative './distortion_effect'
 
 # Implements Overrive distortion
 class Overdrive < DistortionEffect
-  def initialize(file_name)
-    super(file_name)
+  def initialize(wav_array)
+    super(wav_array)
     @threshold = get_peak / 3
   end
 
   def run
-    peak = get_peak
     overdrive(peak)
   end
 

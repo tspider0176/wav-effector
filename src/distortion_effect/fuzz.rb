@@ -2,12 +2,11 @@ require_relative './distortion_effect'
 
 # Implements Fuzz distortion
 class Fuzz < DistortionEffect
-  def initialize(file_name)
-    super(file_name)
+  def initialize(wav_array)
+    super(wav_array)
   end
 
   def run
-    peak = get_peak
     fuzz(peak, 8, -0.2)
   end
 
