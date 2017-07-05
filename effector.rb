@@ -1,13 +1,13 @@
 require 'rubygems'
 require 'wav-file'
 
-require_relative 'effects/effect'
-require_relative 'effects/normalization'
-require_relative 'effects/delay'
-require_relative 'effects/reverb'
-require_relative 'effects/distortion_effect/distortion'
-require_relative 'effects/distortion_effect/overdrive'
-require_relative 'effects/distortion_effect/fuzz'
+require_relative 'src/effect'
+require_relative 'src/normalization'
+require_relative 'src/delay'
+require_relative 'src/reverb'
+require_relative 'src/distortion_effect/distortion'
+require_relative 'src/distortion_effect/overdrive'
+require_relative 'src/distortion_effect/fuzz'
 
 # Treat effectring to wav files
 class WavEffector
