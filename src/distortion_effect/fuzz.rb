@@ -21,7 +21,7 @@ class Fuzz < DistortionEffect
   end
 
   def fuzz(peak, dist, q)
-    @wavs.map do |data|
+    @wav_array.map do |data|
       fuzz_exp(peak, dist, q, data)
     end
   end

@@ -4,7 +4,7 @@ require_relative './distortion_effect'
 class Overdrive < DistortionEffect
   def initialize(wav_array)
     super(wav_array)
-    @threshold = get_peak / 3
+    @threshold = peak / 3
   end
 
   def run
@@ -14,7 +14,7 @@ class Overdrive < DistortionEffect
   private
 
   def overdrive(peak)
-    @wavs.map do |data|
+    @wav_array.map do |data|
       case data.abs
       when 0..@threshold then
         2.0 * data

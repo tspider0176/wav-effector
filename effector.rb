@@ -76,7 +76,7 @@ else
   when 1
     effector.normalize
   when 2
-    effector.distortion
+    effector.distort
   when 3
     effector.fuzz
   when 4
