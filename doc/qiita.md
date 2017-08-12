@@ -15,9 +15,10 @@ ruby 2.2.3p173 (2015-08-18 revision 51636)
 DAFX is a acronym for digital audio effects. It is also the name for a European research project for co-operation and scientific transfer, namely EU-COST-G6 “Digital Audio Effects” (1997-2001).
 ```
 
+
 DAFXのカンファレンスページ [LINK](http://www.dafx.de/) から引用。DAFXは簡単に言うとデジタル音声処理の学会のことです。様々な理論がこの学会で提唱され、色々な音声処理のソフトウェアに利用されています。
 トップページには検索フォームと各年度毎に開催された学会の詳細ページへのリンクがずらっと並んでいます。
-![](./img/dafx_top.png)
+<img width="837" alt="dafx_top.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/0b5da73a-88e4-02b5-12ad-a729b3f2aca2.png">
 
 本稿では、この学会で実際に発表された理論を元に実装を進めていきたいと思います。
 
@@ -25,15 +26,15 @@ DAFXのカンファレンスページ [LINK](http://www.dafx.de/) から引用�
 ### 正規化とは？
 通常はCD、ネット上に転がってる音源等ではピーク音量は **0dB** になっているはずですが、曲によっては **0dB** に満たない曲が存在します。そのような音源をAudacityで開いた場合、以下のような画面になります。
 
-![](./img/not-normalized.png)
+<img width="919" alt="not-normalized.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/cfd21467-d04d-91d7-c910-2c1e8654db96.png">
 
 もちろん「音」を聞く分にはこのままでも問題無い（聞き手が音量を上げれば良い）のですが、
 音量が異常に小さいと、例えば他の音と重ね合わせる際や別の音との音量差に気をつける必要があり、手間が少し増えます（聞いていた曲の音量が小さくて音量MAXにしていたら、次に流れた曲が異様に音圧の高い曲で、耳が殺られた経験されたことある方も居るのでは）
 そのような場合、ピーク音量を **0dB** に合わせる事で音源の **正規化** を行う事が出来ます。
 正規化を行うことにより、曲毎にバラバラな音量を整える事が出来るので聞きやすくなったりします。
-例えば、上の音源を正規化すると、波形的には以下のようになります。
+例えば、上の音源を正規化すると、波形は以下のようになります。
 
-![](./img/normalized.png)
+<img width="914" alt="normalized.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/8f149306-c621-d562-aebb-400695f7333d.png">
 
 波形が増幅され、ピークの音量が0db(画面で言うと1.0ピッタリ)になるように調整されています。  
 現在インターネット上に多く存在する効果音配布サイトやフリーの楽曲サイトでは、特別な理由が無い限り正規化済みのものが配布されていると思われるので、正規化についてはあまり考える必要も無いのですが、
@@ -106,8 +107,7 @@ normalize(wavs)
 
 ### 1.2 Distortion
 Distortionエフェクトの数式での定義は以下になります。
-
-![](./img/def_distortion.png)
+<img width=30% alt="def_distortion.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/ae92780b-ed27-cce5-2d48-f5af46e21e25.png">
 
 この数式が示すグラフは以下のようになります。
 
@@ -148,7 +148,7 @@ end
 #### 1.4.2 実装
 Overdriveの特徴グラフを示す数式を見てみると、以下のようになります。
 
-![](./img/def_overdrive.png)
+<img width=40% alt="def_overdrive.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/15496665-39fa-6147-7bc4-9dc096949ba4.png">
 
 数式だけでみるとわかりにくいので、実際この数式がどのような特徴グラフを描くのか見てみましょう。
 
@@ -175,7 +175,8 @@ end
 
 これは余談ですが、DAFXの各年度の学会のページを眺めてみると、載っている学会のスポンサー企業がすごい豪華でした。(この中で自分はiZotope社のプラグインを愛用しているのでとても驚きました)  
 この学会で発表された理論を元に、自分の手元にあるプラグインが作られているのかと考えると、なかなか興味深いです。今後も色々と調べて行きたいですね。
-![](./img/sponsors.png)
+<img width=80% alt="sponsors.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/b6ef9429-ff43-9425-5793-7e81bdc5f7ce.png">
+
 
 
 ## 参考
