@@ -105,11 +105,23 @@ normalize(wavs)
 * Overdrive
 
 
-### 1.2 Distortion
-Distortionエフェクトの数式での定義は以下になります。
-<img width=30% alt="def_distortion.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/ae92780b-ed27-cce5-2d48-f5af46e21e25.png">
+### 1.2 Distortion(エフェクト)
+#### 1.2.1 説明
+```
+音響機器におけるディストーション (distortion)とは、広義には音像の歪み(ひずみ)、またその歪んだ音色そのものを指す。  
+狭義のディストーションはエレキギターで最も多用されるが、エレキベース、電子オルガン等にも利用される他、ボーカルのエフェクトとして用いられる場合もある。(Wikipedia引用)
+```
 
-この数式が示すグラフは以下のようになります。
+Wikipediaにも書いてある通り、入力を増幅回路で増幅させた後に、増幅させ過ぎてピークをはみ出た部分を無理やりピークで揃えることで元の音に倍音成分を付与するエフェクト方式のことみたいです。Wikiにとてもわかりやすい図が置いてあったので引用します。
+
+<img width=70% alt="def_distortion.png" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Clipping_waveform.svg">
+
+例えば16bitのWAVファイルでは、表現可能な数値は符号あり16bitの範囲-32767〜32768となっています。
+上の図で言うHard Clippingは、上限である32768を超える(もしくは下限である-32767を下回る)入力があった場合、自動的に32768(または-32767)に揃えて波形を出力すれば実現できそうです。
+
+#### 1.2.2 実装
+Distortionの中に更にDistortionという同じ名前のエフェクト効果があって紛らわしいですが、Distortionエフェクトの数式での定義は以下になります。  
+<img width=30% alt="def_distortion.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/ae92780b-ed27-cce5-2d48-f5af46e21e25.png">
 
 また、実装は以下のように書けるでしょう。
 ```rb
@@ -132,6 +144,8 @@ Fuzzという単語には「毛羽立った」という意味があり、その�
 #### 1.3.2 実装
 今回実装するFuzzエフェクトの数式での定義は以下になります。
 
+![](./img/fuzz.png)
+
 ```rb
 def fuzz(peak, dist, q)
   @wavs.map{|data|
@@ -149,8 +163,6 @@ end
 Overdriveの特徴グラフを示す数式を見てみると、以下のようになります。
 
 <img width=40% alt="def_overdrive.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/15496665-39fa-6147-7bc4-9dc096949ba4.png">
-
-数式だけでみるとわかりにくいので、実際この数式がどのような特徴グラフを描くのか見てみましょう。
 
 ```rb
 def overdrive(peak)
