@@ -18,7 +18,9 @@ class Distortion < DistortionEffect
 
   def distort(peak)
     @wav_array.map do |data|
-      sgn(data) * (1.0 - Math.exp(-1.0 * data.abs)) * peak.to_f
+      x = data.fdiv(peak)
+      y = sgn(x) * (1.0 - Math.exp(-5.0 * x.abs))
+      (y * SIGNED_SHORT_MAX).to_i
     end
   end
 end
