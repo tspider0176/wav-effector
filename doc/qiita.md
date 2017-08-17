@@ -2,6 +2,8 @@
 
 本記事内では波形の確認にフリーの非破壊サウンド編集ソフト、Audacityを使っていますが、あくまでも波形を表示するための一般的なツールとして用いているので、本稿ではソフトについての説明はしません。
 
+この記事は[前の記事(Rubyを使ったWAVファイルのBPM解析)](http://qiita.com/stringamp/items/35ea7cca7a70f99f8de3)を書く上で学んだ知識を元に進めています。よかったらこちらもどうぞ。
+
 ## 環境と使用ライブラリ
 ```
 $ ruby -v
@@ -14,6 +16,9 @@ ruby 2.2.3p173 (2015-08-18 revision 51636)
 ```
 DAFX is a acronym for digital audio effects. It is also the name for a European research project for co-operation and scientific transfer, namely EU-COST-G6 “Digital Audio Effects” (1997-2001).
 ```
+
+記事に使われたソースコード全体は以下のリンクからどうぞ。
+[GitHubリポジトリ](https://github.com/tspider0176/wav-effector)
 
 
 DAFXのカンファレンスページ [LINK](http://www.dafx.de/) から引用。DAFXは簡単に言うとデジタル音声処理の学会のことです。様々な理論がこの学会で提唱され、色々な音声処理のソフトウェアに利用されています。
@@ -85,25 +90,27 @@ normalize(wavs)
 ### 1.1 エフェクトとしての「歪み」の種類
 大きく分けてディストーションエフェクトにはDistortion、Fuzz、Overdriveの三つがあります。
 三つの違いは明確なものがなく、実装する側が定義するので違いが現れることもありますが、今回の実装ではDAFXの論文に載っている定義を元に実装しました。  
-最初に、ディストーションはstatic characteristic curve(特徴グラフ)と呼ばれるもので表現されます。DAFXに記載されている論文、「」を見てみると、
+最初に、ディストーションはstatic characteristic curve(特徴グラフ)と呼ばれるもので表現されます。DAFXに記載されている論文、「Nonlinear Processing」を見てみると、
+
 * Distortion  
+
+<img width="517" alt="スクリーンショット 2017-08-16 22.48.13.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/2f59e9c1-3233-4b1b-25f3-99cb3bc54d57.png">
+
 指数的に滑らかに増幅
 
 * Fuzz  
+
+<img width="611" alt="スクリーンショット 2017-08-16 22.46.12.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/5bfe21fc-801d-7b37-5496-2b82cfabd946.png">
+
 一定の値を区切りに出力を固定又は増幅
 
 * Overdrive  
+
+<img width="634" alt="スクリーンショット 2017-08-16 22.46.45.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/fd376185-cafd-3e1d-fabe-fb7b370d5761.png">
+
 ある一定の値を超えた所で極端に増幅
 
-と行った特徴があります。このグラフだけでは分かりにくいので、自分が普段使っているDAWのFL Studio12 を利用して実際にエフェクトを付与する前と後で波形の変化を確認してみました。  
-確認に使ったプラグインは、 *Fruity Wavshaper* です。
-
-* Distortion
-
-* Fuzz
-
-* Overdrive
-
+と行った特徴があります。
 
 ### 1.2 Distortion(エフェクト)
 #### 1.2.1 説明
@@ -124,6 +131,7 @@ Distortionの中に更にDistortionという同じ名前のエフェクト効果
 <img width=30% alt="def_distortion.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/ae92780b-ed27-cce5-2d48-f5af46e21e25.png">
 
 また、実装は以下のように書けるでしょう。
+
 ```rb
 def distort(peak)
     @wavs.map{|data|
@@ -141,14 +149,13 @@ $ ruby effector.rb sample/piano.rb 2
 ```
 
 元の音声ファイルはsample内に入っている *piano.wav* を使用。
-
-![](./img/piano.png)
+<img width="918" alt="piano.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/490d4531-5f5d-5414-f911-9ea34e1d504f.png">
 
 この波形が
 
-![](./img/piano-dist.png)
+<img width="916" alt="piano-dist.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/28d26369-ba78-b177-8849-4b4175798ce0.png">
 
-めっちゃソーセージに。
+めっちゃソーセージに。あれ〜？
 少し調べてみたのですが、論文内で引用されている数式に誤植があるようで、少し調べまわってみたのですが正しい数式が見つからず…残念な結果になってしまいました。
 元の音階は辛うじて聞き取れるレベルですが、ここまで増幅されちゃうと最早別物ですね。
 実際に聴いてみましたが、ニコニコ動画で音量注意を毎日食らってる自分でも聞くに耐えないうるささだったので非推奨。  
@@ -166,7 +173,7 @@ Fuzzという単語には「毛羽立った」という意味があり、その�
 #### 1.3.2 実装
 今回実装するFuzzエフェクトの数式での定義は以下になります。
 
-![](./img/fuzz.png)
+<img width="431" alt="fuzz.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/a5cf31b2-896f-0aad-d38f-47c95d54e434.png">
 
 ```rb
 def fuzz(peak, dist, q)
@@ -188,15 +195,15 @@ $ ruby effector.rb sample/piano.rb 3
 
 元の音声ファイルは同じくsample内に入っている *piano.wav* を使用。
 
-![](./img/piano.png)
+<img width="918" alt="piano.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/490d4531-5f5d-5414-f911-9ea34e1d504f.png">
 
 上の波形が、
 
-![](./img/piano-fuzz.png)
+<img width="917" alt="piano-fuzz.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/554ba59a-96bf-eefa-edf2-4fc99e02c690.png">
 
-見事に閾値以下がすっぱり切られた波形へと変換されました。
+見事に閾値以下がすっぱり切られた波形へと変換されました。どうやらちゃんと動いているようです。
 単純に閾値以下を削って若干変更しただけですが、音には変化がありました。  
-実際に聴いてみるとギンギンしたちょっとうるさい音に変化してました。
+実際に聴いてみるとギンギンしたちょっとうるさい音に変化してました。これが毛羽立った音…。
 
 ### 1.4 Overdrive
 #### 1.4.1 説明
@@ -235,26 +242,26 @@ $ ruby effector.rb sample/piano.rb 4
 
 元の音声ファイルは同じくsample内に入っている *piano.wav* を使用。
 
-![](./img/piano.png)
+<img width="918" alt="piano.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/490d4531-5f5d-5414-f911-9ea34e1d504f.png">
 
 上の波形が、
 
-![](./img/piano-od.png)
+<img width="915" alt="piano-od.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/f78130b6-00ea-7b97-3161-c0cefe752f3c.png">
 
 このような波形に出力されました。数式からもわかる通り、thresholdを基準にそれぞれの帯域で異なる数式を当てはめたので、閾値を超える部分では一気に波形が増幅されてピークにべったり張り付いてるのが確認できます。  
-実際に聞いてみましたがメッチャうるさかったです。
+実際に聞いてみましたがメッチャうるさかったです。もうちょっと常識的なうるささになってほしい。
 
 
 ## まとめ
 この記事はAIZU AVENT CALENDAR 2016 で書いた記事から発展して取り組んだ内容になりました。
-今までサウンドプログラミングには全く触れてきませんでしたが、趣味と自分の大学生活で身につけた技術双方を取り入れる事が出来てとても楽しかったです。
-論文については専門外なので論文を書くことは無いでしょうが、論文を読む良い練習にもなりました（この記事を出す頃にはとっくに卒論は書き終わってますが…）
+今までの学生生活では、講義はもちろん自主的な学習でもサウンドプログラミングには全く触れてきませんでしたが、趣味と自分の大学生活で身につけた技術双方を取り入れる事が出来る分野が見つかってとても楽しかったです。
+専門外なのでDAFXの要な論文を書くことは無いでしょうが、論文を読む良い練習にもなりました。
 これからも興味のある論文を見付けたら積極的に読み、可能であれば実装していきたいと思います。
+(rubocopに実装が怒られている部分があるので次の実装の前にリファクタリングを学ばなければいけなさそうです)
 
 これは余談ですが、DAFXの各年度の学会のページを眺めてみると、載っている学会のスポンサー企業がすごい豪華でした。(この中で自分はiZotope社のプラグインを愛用しているのでとても驚きました)  
 この学会で発表された理論を元に、自分の手元にあるプラグインが作られているのかと考えると、なかなか興味深いです。今後も色々と調べて行きたいですね。
 <img width=80% alt="sponsors.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/b6ef9429-ff43-9425-5793-7e81bdc5f7ce.png">
-
 
 
 ## 参考
