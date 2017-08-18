@@ -130,9 +130,14 @@ Wikipediaにも書いてある通り、入力を増幅回路で増幅させた�
 Distortionの中に更にDistortionという同じ名前のエフェクト効果があって紛らわしいですが、Distortionエフェクトの数式での定義は以下になります。  
 <img width=30% alt="def_distortion.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/ae92780b-ed27-cce5-2d48-f5af46e21e25.png">
 
-また、実装は以下のように書けるでしょう。
+(※8/18追記)
+論文に掲載されている数式に誤植がありました。正しくは、
 
-(※8/18修正)
+<img width="208" alt="def_distortion_fix.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/4b0a8dca-a3c1-2efe-a787-f63e2cac6f5c.png">
+
+にて A=5 の場合を考えれば適切に出力されます。
+実装は以下のように書けるでしょう。
+
 ```rb
 def distort(peak)
   @wavs.map{|data|
@@ -156,26 +161,13 @@ $ ruby effector.rb sample/piano.rb 2
 
 この波形が
 
-<img width="916" alt="piano-dist.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/28d26369-ba78-b177-8849-4b4175798ce0.png">
+<img width="920" alt="piano-dist-fix.png" src="https://qiita-image-store.s3.amazonaws.com/0/146476/1e62d1d7-e9ae-c3dc-82e2-87ba7089f855.png">
 
-めっちゃソーセージに。あれ〜？
-少し調べてみたのですが、論文内で引用されている数式に誤植があるようで、少し調べまわってみたのですが正しい数式が見つからず…残念な結果になってしまいました。
-元の音階は辛うじて聞き取れるレベルですが、ここまで増幅されちゃうと最早別物ですね。
-実際に聴いてみましたが、ニコニコ動画で音量注意を毎日食らってる自分でも聞くに耐えないうるささだったので非推奨。  
 
-**(※8/18追記)**  
-コメント欄にて、@HMMNRST さんより数式の改善点とプログラム上の問題を指摘していただきました！  
-上記のプログラムでは `@wavs` に対するmap操作中で、 `data` の範囲が考慮されていなかったので、以下のように修正すれば適切に動くようになります。
-誤植が見受けられた数式についても、
+元波形にとてもいい感じにディストーションがかかっていて感動しました…。
+三つの音を聞き比べてみた中では一番好きかもしれません。
 
-![](./img/def_distortion_fix.png)
-
-にて A=5 の場合を考えれば適切に出力されます。実際に実行した結果は以下のようになります。
-
-![](./img/piano-dist-fix.png)
-
-元波形にとてもいい感じにディストーションがかかっていて感動しました…。三つの音の中では一番好きかも。
-ご指摘ありがとうございましたm(_ _)m
+上記の実行結果につきましては、コメント欄にて @HMMNRST さんより数式の改善点とプログラム上の問題を指摘していただきました。重ね重ねご指摘ありがとうございましたm(_ _ )m
 
 
 ### 1.3 Fuzz
